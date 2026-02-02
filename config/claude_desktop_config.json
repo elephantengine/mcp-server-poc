@@ -1,0 +1,43 @@
+{
+  "mcpServers": {
+    "feedback-uuid-prepender": {
+      "command": "/absolute/path/to/python3",
+      "args": [
+        "/absolute/path/to/servers/add-uuid.py"
+      ]
+    },
+    "feedback-embeddings-appender": {
+      "command": "/absolute/path/to/python3",
+      "args": [
+        "/absolute/path/to/servers/gen-embeddings.py"
+      ]
+    },
+    "feedback-store-embeddings": {
+      "command": "/absolute/path/to/python3",
+      "args": [
+        "/absolute/path/to/servers/store-embeddings.py"
+      ]
+    },
+    "feedback-query": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "export $(grep -v '^#' /absolute/path/to/.env_ro | xargs) && npx -y @modelcontextprotocol/server-query-embeddings.py"
+      ]
+    },
+    "postgres": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "export $(grep -v '^#' /absolute/path/to/.env | xargs) && npx -y @modelcontextprotocol/server-postgres \"${DATABASE_URL}\""
+      ]
+    },
+    "slack": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "export $(grep -v '^#' /absolute/path/to/.env | xargs) && npx -y @modelcontextprotocol/server-slack"
+      ]
+    }
+  }
+}
